@@ -1,19 +1,21 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask import Flask, render_template
 from flask_frozen import Freezer
-from flask import Flask
 
 app = Flask(__name__)
 
+# Define your routes as usual
 @app.route('/')
 def home():
-    return "Hello, Flask!"
+    return render_template('index.html')
+
+# Initialize the freezer
+freezer = Freezer(app)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-app = Flask(__name__)
+    freezer.freeze()
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todo.db"
